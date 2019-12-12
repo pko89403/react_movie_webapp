@@ -32,18 +32,26 @@ const movies = [
 ]
 
 class App extends Component {
-  //Render : ComponentWillMount() -> render() -> componentDIdMount()
-  componentWillMount() {
-    console.log("Will Mount");
+  // Render : ComponentWillMount() -> render() -> componentDIdMount()
+  // Update : ComponentReceiveProps() -> ShouldComponentUpdate() -> ComponentWillUpdate() -> render() -> componentDidMount()
+  // Whenever state is changed, Component Updates, render happens
+  state = {
+    greeting : "Hello!"
   }
 
   componentDidMount() {
-    console.log("Did Mount");
+    setTimeout(() => {
+      //this.state.greeting = 'Something' // Should Never Write state directly, render thing does not updated
+      this.setState({
+        greeting: "Hello Again!"
+      })
+    }, 5000) // wait 5 seconds state changes automatically
   }
   render() {
     console.log("render ");
     return (
       <div className="App">
+        {this.state.greeting} 
         {movies.map((movie, index) => {
           return < Movie title={movie.title} poster={movie.poster} key={index} />
         })}
