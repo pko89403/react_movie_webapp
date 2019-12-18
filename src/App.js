@@ -11,6 +11,9 @@ class App extends Component {
   // Render : ComponentWillMount() -> render() -> componentDIdMount()
   // Update : ComponentReceiveProps() -> ShouldComponentUpdate() -> ComponentWillUpdate() -> render() -> componentDidMount()
   // Whenever state is changed, Component Updates, render happens
+
+  // smart component have states
+  // dumb component don't have state all they have props
   state = {    
   }
 
