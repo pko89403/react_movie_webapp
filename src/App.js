@@ -8,6 +8,15 @@ object - props
 /*
 AJAX - Asynchrous Javascript And XML ++ JSON ( Javascript Object Notation )
 Using fetch attach AJAX on React
+
+promise is new javascript concept - asynchronous programming
+synchronous -> flow as order, wait until pre-job finished 
+asynchronous -> it doesn't need finished before job
+
+fetch & promise makes you create scenario and manipulate that
+
+
+
 */
 
 class App extends Component {
@@ -21,7 +30,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://yts.lt/api/v2/list_movies.json?sort_by=rating")
+    fetch("https://yts.lt/api/v2/list_movies.json?sort_by=like_count")
+      .then(response => response.json())
+      .then(json => console.log(json))
+      .catch(err => console.log(err))
   }
 
 /*
