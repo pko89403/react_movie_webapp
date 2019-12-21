@@ -101,7 +101,7 @@ componentDidMount() {
     console.log("render ");
     return (
       // if true or false
-      <div className="App">
+      <div className={this.movies ? "App" : "App--loading"}>
         {this.state.movies ? this._renderMovies() :  'loading'}
       </div>
     );
