@@ -15,6 +15,7 @@ asynchronous -> it doesn't need finished before job
 
 fetch & promise makes you create scenario and manipulate that
 
+await & async
 
 
 */
@@ -30,12 +31,24 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://yts.lt/api/v2/list_movies.json?sort_by=like_count")
-      .then(response => response.json())
-      .then(json => console.log(json))
-      .catch(err => console.log(err))
+    this._getMovies();
   }
 
+  _getMovies = async() => { // it doesn't block anything .. to wait
+    const movies = await this._callAPI() // waiting ths._callAPI() finish, return values 
+    this.setState({ // setState not start till await code getting finished
+      movies
+    })
+    // 
+
+  }
+
+  _callAPI = () => {
+    return fetch("https://yts.lt/api/v2/list_movies.json?sort_by=like_count")
+      .then(response => response.json()) // arrow function , modern javascript, means return
+      .then(json => json.data.movies)
+      .catch(err => console.log(err))
+  }
 /*
 componentDidMount() {
   setTimeout(() => { // execute after certain amount of time
@@ -74,7 +87,7 @@ componentDidMount() {
 
   _renderMovies = () => {
     const movies = this.state.movies.map((movie, index) => {
-      return <Movie title={movie.title} poster = {movie.poster} key = {index} /> 
+      return <Movie title={movie.title} poster = {movie.large_cover_image} key = {index} /> 
     })
     return movies
   }
